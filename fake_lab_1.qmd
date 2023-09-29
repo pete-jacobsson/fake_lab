@@ -1,0 +1,41 @@
+---
+title: "fake_lab 1"
+author: "Pete"
+format: html
+---
+
+## Introduction
+
+This is the first iteration of fake lab. Our goal here is to simulate four simple scenarios that can feed a basic Bayesian intercomparison model. 
+
+The fake lab will have five instruments, three operators and will be churning out reference measurement. 
+
+The refernce material has a true value of 50 u (u stands for some unit). Instruments measure this with a normal error of N(0,5). Operators add a further N(0,5) worth of noise.
+
+In scenario 1 everything works perfect.
+In scenario 2 one of the instruments introduces an offset of N(2, 6) instead of the expected N(0, 5).
+In scenario 3 the machines are working well, but one of the operators is clumsy - and adds N(0,8) uncertainty rather than N(0,5).
+In scenario 4 I include both the faulty machine and the clumsy operator. 
+
+Each scenario consists of 1000 measurements randomly assigned between the operators and the instruments. 
+
+
+
+
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this 
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
