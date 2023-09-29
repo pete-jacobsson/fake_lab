@@ -21,21 +21,24 @@ Each scenario consists of 1000 measurements randomly assigned between the operat
 
 
 
-
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
+## Set up
 ```{r}
-1 + 1
+library(tidyverse)
 ```
 
-You can add options to executable code like this 
 
 ```{r}
-#| echo: false
-2 * 2
+instruments <- c("instrument_1", "instrument_2", "instrument_3", "instrument_4", 
+                 "instrument_5")
+operators <- c("operator_1", "operator_2", "operator_3")
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+
+## Scenario 1
+
+The no error scenario
+```{r}
+
+```
+
+
