@@ -56,6 +56,145 @@ mutate(
                       sd = sqrt(instrument_error ^ 2 + operator_error ^ 2)),
                      rnorm)
 )
+
+write_csv(scenario_1, "fake1_scenario1.csv")
+```
+
+## Scenario 2
+
+Instrument 5 introduces an offset of N(2, 6) instead of the expected N(0, 5).
+```{r}
+scenario_2 <- data.frame(
+  measurement_id = seq(1, 1000, 1),
+  instrument = sample(instruments, 1000, TRUE),
+  operator = sample(operators, 1000, TRUE),
+  ref_value = 50
+  ) |>
+  mutate(
+    instrument_offset = case_when(
+      str_detect(instrument, "1") ~ 0,
+      str_detect(instrument, "2") ~ 0,
+      str_detect(instrument, "3") ~ 0,
+      str_detect(instrument, "4") ~ 0,
+      str_detect(instrument, "5") ~ 2
+    ),
+    instrument_error = case_when(
+      str_detect(instrument, "1") ~ 5,
+      str_detect(instrument, "2") ~ 5,
+      str_detect(instrument, "3") ~ 5,
+      str_detect(instrument, "4") ~ 5,
+      str_detect(instrument, "5") ~ 6
+    ),
+    operator_offset = case_when(
+      str_detect(operator, "1") ~ 0,
+      str_detect(operator, "2") ~ 0,
+      str_detect(operator, "3") ~ 0
+    ),
+    operator_error = case_when(
+      str_detect(operator, "1") ~ 5,
+      str_detect(operator, "2") ~ 5,
+      str_detect(operator, "3") ~ 5
+    )   ### Use joins for functionalizing things in fake 2!!!
+  ) |>
+mutate(
+  measurement = pmap(list(1, 
+                      mean = 50 + instrument_offset + operator_offset,
+                      sd = sqrt(instrument_error ^ 2 + operator_error ^ 2)),
+                     rnorm)
+)
+
+write_csv(scenario_2, "fake1_scenario2.csv")
 ```
 
 
+
+## Scenario 3
+Operator 3 has error of N(0, 10)
+
+```{r}
+scenario_3 <- data.frame(
+  measurement_id = seq(1, 1000, 1),
+  instrument = sample(instruments, 1000, TRUE),
+  operator = sample(operators, 1000, TRUE),
+  ref_value = 50
+  ) |>
+  mutate(
+    instrument_offset = case_when(
+      str_detect(instrument, "1") ~ 0,
+      str_detect(instrument, "2") ~ 0,
+      str_detect(instrument, "3") ~ 0,
+      str_detect(instrument, "4") ~ 0,
+      str_detect(instrument, "5") ~ 0
+    ),
+    instrument_error = case_when(
+      str_detect(instrument, "1") ~ 5,
+      str_detect(instrument, "2") ~ 5,
+      str_detect(instrument, "3") ~ 5,
+      str_detect(instrument, "4") ~ 5,
+      str_detect(instrument, "5") ~ 5
+    ),
+    operator_offset = case_when(
+      str_detect(operator, "1") ~ 0,
+      str_detect(operator, "2") ~ 0,
+      str_detect(operator, "3") ~ 0
+    ),
+    operator_error = case_when(
+      str_detect(operator, "1") ~ 5,
+      str_detect(operator, "2") ~ 5,
+      str_detect(operator, "3") ~ 10
+    )   ### Use joins for functionalizing things in fake 2!!!
+  ) |>
+mutate(
+  measurement = pmap(list(1, 
+                      mean = 50 + instrument_offset + operator_offset,
+                      sd = sqrt(instrument_error ^ 2 + operator_error ^ 2)),
+                     rnorm)
+)
+
+write_csv(scenario_3, "fake1_scenario3.csv")
+```
+
+## Scenario 4
+Issues from both scenario 2 and 3 are present
+```{r}
+scenario_4 <- data.frame(
+  measurement_id = seq(1, 1000, 1),
+  instrument = sample(instruments, 1000, TRUE),
+  operator = sample(operators, 1000, TRUE),
+  ref_value = 50
+  ) |>
+  mutate(
+    instrument_offset = case_when(
+      str_detect(instrument, "1") ~ 0,
+      str_detect(instrument, "2") ~ 0,
+      str_detect(instrument, "3") ~ 0,
+      str_detect(instrument, "4") ~ 0,
+      str_detect(instrument, "5") ~ 2
+    ),
+    instrument_error = case_when(
+      str_detect(instrument, "1") ~ 5,
+      str_detect(instrument, "2") ~ 5,
+      str_detect(instrument, "3") ~ 5,
+      str_detect(instrument, "4") ~ 5,
+      str_detect(instrument, "5") ~ 6
+    ),
+    operator_offset = case_when(
+      str_detect(operator, "1") ~ 0,
+      str_detect(operator, "2") ~ 0,
+      str_detect(operator, "3") ~ 0
+    ),
+    operator_error = case_when(
+      str_detect(operator, "1") ~ 5,
+      str_detect(operator, "2") ~ 5,
+      str_detect(operator, "3") ~ 10
+    )   ### Use joins for functionalizing things in fake 2!!!
+  ) |>
+mutate(
+  measurement = pmap(list(1, 
+                      mean = 50 + instrument_offset + operator_offset,
+                      sd = sqrt(instrument_error ^ 2 + operator_error ^ 2)),
+                     rnorm)
+)
+
+write_csv(scenario_4, "fake1_scenario4.csv")
+```
