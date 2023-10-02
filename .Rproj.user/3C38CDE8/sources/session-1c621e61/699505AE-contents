@@ -55,7 +55,8 @@ mutate(
                       mean = 50 + instrument_offset + operator_offset,
                       sd = sqrt(instrument_error ^ 2 + operator_error ^ 2)),
                      rnorm)
-)
+  ) |>
+  unnest(measurement)
 
 write_csv(scenario_1, "fake1_scenario1.csv")
 ```
@@ -101,7 +102,8 @@ mutate(
                       mean = 50 + instrument_offset + operator_offset,
                       sd = sqrt(instrument_error ^ 2 + operator_error ^ 2)),
                      rnorm)
-)
+) |>
+  unnest(measurement)
 
 write_csv(scenario_2, "fake1_scenario2.csv")
 ```
@@ -149,7 +151,8 @@ mutate(
                       mean = 50 + instrument_offset + operator_offset,
                       sd = sqrt(instrument_error ^ 2 + operator_error ^ 2)),
                      rnorm)
-)
+) |>
+  unnest(measurement)
 
 write_csv(scenario_3, "fake1_scenario3.csv")
 ```
@@ -194,7 +197,8 @@ mutate(
                       mean = 50 + instrument_offset + operator_offset,
                       sd = sqrt(instrument_error ^ 2 + operator_error ^ 2)),
                      rnorm)
-)
+) |>
+  unnest(measurement)
 
 write_csv(scenario_4, "fake1_scenario4.csv")
 ```
